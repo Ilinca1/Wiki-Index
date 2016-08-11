@@ -19,8 +19,10 @@ public class Connection {
             Map<String, Integer> map = new HashMap<String, Integer>();
             map =  findById("Snail");
             Iterator it = map.entrySet().iterator();
-            while (it.hasNext()) {
+            int i = 0;
+            while (it.hasNext() && i < 10) {
                 Map.Entry pair = (Map.Entry) it.next();
+                i++;
                 System.out.println(pair.getKey() + ":" + pair.getValue());
             }
 
@@ -49,8 +51,8 @@ public class Connection {
             e.printStackTrace();
         }
         map = wordCounter.generateMap(str);
-
-        return map;
+        Map<String, Integer> sortedMapDesc = WordCounter.sortByComparator(map, false);
+        return sortedMapDesc;
     }
 
 
