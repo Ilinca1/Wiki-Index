@@ -1,7 +1,7 @@
 package com.endava.project.services;
 
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class FirstWordsGenerator {
 
