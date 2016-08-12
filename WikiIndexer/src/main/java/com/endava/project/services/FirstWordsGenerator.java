@@ -1,20 +1,24 @@
 package com.endava.project.services;
 
+import java.io.*;
 import java.util.*;
 
 public class FirstWordsGenerator {
 
-    public Map<String, Integer> findWordOccurrence(String title) {
+    private static final String separator = "(\\.|,|;|:|\\\\|/|\\?|~|`|<|>|\\[|]|\\{|}|\\(|\\)" +
+            "|!|@|#|\\$|%|\\^|&|\\-|_|\\+|'|=|\\*|\"|\\|| |\\t|\\n|\\r)+";
+    private static final List<String> ignoreAll = Arrays.asList("the", "of", "a", "and", "in", "to", "are", "as", "that",
+            "is", "with", "for", "or", "they", "be", "on", "their", "have", "other", "used", "from",
+            "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
+            "has", "not", "been", "some", "it", "n", "many", "its", "s", "000", "nthe", "use", "frp", "but",
+            "ten", "half", "de", "at", "was");
+    private ReadURL readURL = new ReadURL();
+
+    public Map<String, Integer> findWordOccurrence(String text) {
         Map<String, Integer> map = new HashMap<String, Integer>();
         Integer counter = 1;
-        String separator = "(\\.|,|;|:|\\\\|/|\\?|~|`|<|>|\\[|]|\\{|}|\\(|\\)" +
-                "|!|@|#|\\$|%|\\^|&|\\-|_|\\+|'|=|\\*|\"|\\|| |\\t|\\n|\\r)+";
-        List<String> ignoreAll = Arrays.asList("the", "of", "a", "and", "in", "to", "are", "as", "that",
-                "is", "with", "for", "or", "they", "be", "on", "their", "have", "other", "used", "from",
-                "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
-                "has", "not", "been", "some", "it", "n", "many", "its", "s", "000", "nthe", "use", "frp", "but");
 
-        String[] words = title.split(separator);
+        String[] words = text.split(separator);
         for (int i = 0; i < words.length; i++) {
             words[i] = words[i].toLowerCase();
             if (!ignoreAll.contains(words[i])) {
@@ -22,6 +26,54 @@ public class FirstWordsGenerator {
                 if (counter == null)
                     counter = new Integer(0);
                 map.put(words[i], counter + 1);
+            }
+        }
+
+        return map;
+    }
+
+    public Map<String, Integer> findWordOccurrenceMultiple(String fileName) {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        ArrayList<String> titles = new ArrayList<>();
+        int titleCounter = 0;
+        Integer counter = 1;
+
+        Reader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+            fileReader = new FileReader(fileName);
+            bufferedReader = new BufferedReader(fileReader);
+            String data;
+            while ((data = bufferedReader.readLine()) != null) {
+                titles.add(data);
+                titleCounter++;
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("File missing '" + fileName + "'");
+        } catch (IOException ex) {
+            System.out.println("I/O Exception:" + ex.getMessage());
+        } finally {
+            System.out.println("---");
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException ex) {
+                System.out.println("I/O Exception:" + ex.getMessage());
+            }
+        }
+
+        for (int i = 0; i < titleCounter; i++) {
+            String content = readURL.readFromURL(titles.get(i));
+            String[] words = content.split(separator);
+            for (int j = 0; j < words.length; j++) {
+                words[j] = words[j].toLowerCase();
+                if (!ignoreAll.contains(words[j])) {
+                    counter = map.get(words[j]);
+                    if (counter == null)
+                        counter = new Integer(0);
+                    map.put(words[j], counter + 1);
+                }
             }
         }
 
