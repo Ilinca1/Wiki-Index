@@ -39,4 +39,14 @@ public class MainService {
         }
         return list;
     }
+
+
+    public Map<String, Integer> showFromFile() {
+        List<Occurrence> list = new ArrayList<>();
+
+        Map<String, Integer> map1 = firstWordsGenerator.findWordOccurrenceMultiple("D:/Final Project/Wiki-Indexer/WikiIndexer/FisierTitluri.txt");
+        Map<String, Integer> map2 = firstWordsGenerator.sortTheWords(map1);
+        return firstWordsGenerator.wordsToBeSaved(map2);
+
+    }
 }

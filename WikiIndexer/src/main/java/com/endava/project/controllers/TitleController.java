@@ -1,9 +1,14 @@
 package com.endava.project.controllers;
 
+import com.endava.project.entities.Occurrence;
 import com.endava.project.services.OccurrenceService;
 import com.endava.project.services.TitleService;
+import com.endava.project.services.impl.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Iterator;
+import java.util.Map;
 
 @RestController
 public class TitleController {
@@ -13,6 +18,9 @@ public class TitleController {
 
     @Autowired
     private OccurrenceService occurrenceService;
+
+    @Autowired
+    private MainService mainService;
 
     @RequestMapping(value = "/document", method = RequestMethod.GET)
     @ResponseBody
@@ -27,6 +35,19 @@ public class TitleController {
         }
 
     }
+
+    @RequestMapping(value = "/file", method = RequestMethod.GET)
+    @ResponseBody
+    public void showWordsFromFile() {
+
+        Iterator it = mainService.showFromFile().entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            System.out.println(pair.getKey() + " " + pair.getValue());
+        }
+    }
+
+
 
 
 }
