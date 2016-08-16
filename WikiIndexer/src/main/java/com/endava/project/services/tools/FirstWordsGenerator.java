@@ -1,7 +1,6 @@
-package com.endava.project.services;
+package com.endava.project.services.tools;
 
 import java.util.*;
-import java.io.*;
 
 public class FirstWordsGenerator {
 
@@ -56,7 +55,7 @@ public class FirstWordsGenerator {
     //Sorteaza mapul dupa cele mai multe aparitii
     public Map<String, Integer> sortTheWords(Map<String, Integer> map) {
         List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(map.entrySet());
-        // Sorting the list based on values
+
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
             public int compare(Map.Entry<String, Integer> o1,
                                Map.Entry<String, Integer> o2) {
@@ -64,7 +63,7 @@ public class FirstWordsGenerator {
             }
         });
 
-        // Maintaining insertion order with the help of LinkedList
+        //Cu ajutorul unei LinkedList mentinem ordinea inserarii
         Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> entry : list) {
             sortedMap.put(entry.getKey(), entry.getValue());
@@ -73,7 +72,7 @@ public class FirstWordsGenerator {
         return sortedMap;
     }
 
-    //primeste o lista sortata si pastreaza primele 10 elemente
+    //Primeste o lista sortata si pastreaza primele 10 elemente
     public Map<String, Integer> wordsToBeSaved(Map<String, Integer> map) {
         Map<String, Integer> finalMap = new HashMap<>();
         Iterator it = map.entrySet().iterator();

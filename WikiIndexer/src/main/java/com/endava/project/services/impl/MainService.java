@@ -2,12 +2,10 @@ package com.endava.project.services.impl;
 
 import com.endava.project.entities.Occurrence;
 import com.endava.project.entities.Title;
-import com.endava.project.services.*;
+import com.endava.project.services.tools.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by ivamesu on 8/11/2016.
@@ -15,16 +13,14 @@ import java.util.stream.Stream;
 @Service
 public class MainService {
 
-    FirstWordsGenerator firstWordsGenerator = new FirstWordsGenerator();
-
-    public List<Occurrence> sendInTheDB(Title title) {
-        ReadOneTitle readOneTitle = new ReadOneTitle(title);
-        readOneTitle.run();
-        return readOneTitle.getList();
+    public List<Occurrence> showWordsForSingleTitle(Title title) {
+        SingleTitleProcess singleTitleProcess = new SingleTitleProcess(title);
+        singleTitleProcess.generateTopWords();
+        return singleTitleProcess.getList();
     }
 
 
-    public Map<String, Integer> showFromFile() {
+    public Map<String, Integer> showWordsForMultiTitles() {
         FirstWordsGenerator firstWordsGenerator = new FirstWordsGenerator();
         MapMerger mapMerger = new MapMerger();
         FileReader fileReader = new FileReader();
@@ -33,10 +29,10 @@ public class MainService {
 
         int threadTitlesSize = titles.size() / 4;
 
-        ReadTitlesFromFile firstThread = new ReadTitlesFromFile(titles.subList(0, threadTitlesSize));
-        ReadTitlesFromFile secondThread = new ReadTitlesFromFile(titles.subList(threadTitlesSize, 2 * threadTitlesSize));
-        ReadTitlesFromFile thirdThread = new ReadTitlesFromFile(titles.subList(2 * threadTitlesSize, 3 * threadTitlesSize));
-        ReadTitlesFromFile fourthThread = new ReadTitlesFromFile(titles.subList(3 * threadTitlesSize, titles.size()));
+        MultiTitlesProcess firstThread = new MultiTitlesProcess(titles.subList(0, threadTitlesSize));
+        MultiTitlesProcess secondThread = new MultiTitlesProcess(titles.subList(threadTitlesSize, 2 * threadTitlesSize));
+        MultiTitlesProcess thirdThread = new MultiTitlesProcess(titles.subList(2 * threadTitlesSize, 3 * threadTitlesSize));
+        MultiTitlesProcess fourthThread = new MultiTitlesProcess(titles.subList(3 * threadTitlesSize, titles.size()));
 
         Map<String, Integer> finalMap = new HashMap<>();
 

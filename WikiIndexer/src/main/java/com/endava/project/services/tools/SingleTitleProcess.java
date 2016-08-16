@@ -1,4 +1,4 @@
-package com.endava.project.services;
+package com.endava.project.services.tools;
 
 import com.endava.project.entities.Occurrence;
 import com.endava.project.entities.Title;
@@ -12,12 +12,12 @@ import java.util.Map;
  * Created by bsoimu on 8/12/2016.
  */
 
-public class ReadOneTitle implements Runnable {
+public class SingleTitleProcess {
 
     private Title title;
     private static List<Occurrence> list = new ArrayList<>();
 
-    public ReadOneTitle(Title title) {
+    public SingleTitleProcess(Title title) {
         this.title = title;
     }
 
@@ -26,11 +26,10 @@ public class ReadOneTitle implements Runnable {
     }
 
     public static void setList(List<Occurrence> list) {
-        ReadOneTitle.list = list;
+        SingleTitleProcess.list = list;
     }
 
-    @Override
-    public void run() {
+    public void generateTopWords() {
         FirstWordsGenerator firstWordsGenerator = new FirstWordsGenerator();
         ReadURL readURL = new ReadURL();
         String content = readURL.readFromURL(title.getName());
@@ -45,9 +44,7 @@ public class ReadOneTitle implements Runnable {
             occurrence.setWord((String) pair.getKey());
             occurrence.setOccurrences((Integer) pair.getValue());
             occurrence.setTitle(title);
-            synchronized (list) {
-                list.add(occurrence);
-            }
+            list.add(occurrence);
         }
     }
 }

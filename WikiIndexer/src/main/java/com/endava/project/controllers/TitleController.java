@@ -35,7 +35,7 @@ public class TitleController {
             Long before = System.currentTimeMillis();
             titleService.saveTitle(title);
             occurrenceService.saveOccurrence(title);
-            list =  mainService.sendInTheDB(titleService.findByName(title));
+            list =  mainService.showWordsForSingleTitle(titleService.findByName(title));
             Long after = System.currentTimeMillis();
             titleDTO.setName(title);
             titleDTO.setWordsList(list);
@@ -56,9 +56,14 @@ public class TitleController {
 
     @RequestMapping(value = "/file", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Integer> showWordsFromFile() {
+    public void showWordsFromFile() {
 
-        return mainService.showFromFile();
+        Iterator it = mainService.showWordsForMultiTitles().entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            System.out.println(pair.getKey() + " " + pair.getValue());
+        }
+    }
 
     }
 

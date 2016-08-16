@@ -30,7 +30,7 @@ public class OccurrenceServiceImpl implements OccurrenceService {
 
         Title title = titleRepository.findByName(name);
 
-        for (Occurrence occurrence : mainService.sendInTheDB(title)) {
+        for (Occurrence occurrence : mainService.showWordsForSingleTitle(title)) {
             occurrenceRepository.save(occurrence);
         }
     }
