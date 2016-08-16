@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class OccurrenceServiceImpl implements OccurrenceService {
 
@@ -26,11 +28,19 @@ public class OccurrenceServiceImpl implements OccurrenceService {
     @Transactional
     public void saveOccurrence(String name) {
 
-        Title t = titleRepository.findByName(name);
+        Title title = titleRepository.findByName(name);
 
-        for (Occurrence occurrence : mainService.sendInTheDB(t)) {
+        for (Occurrence occurrence : mainService.sendInTheDB(title)) {
             occurrenceRepository.save(occurrence);
         }
+    }
+
+    @Override
+    public List<Occurrence> findAllOccurrences(String name) {
+
+        Title title = titleRepository.findByName(name);
+        return occurrenceRepository.findByTitle(title.getId());
+
     }
 
 }
