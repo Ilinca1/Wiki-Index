@@ -1,5 +1,6 @@
 package com.endava.project.controllers;
 
+import com.endava.project.dto.TitleDTO;
 import com.endava.project.entities.Occurrence;
 import com.endava.project.services.OccurrenceService;
 import com.endava.project.services.TitleService;
@@ -26,18 +27,31 @@ public class TitleController {
 
     @RequestMapping(value = "/document", method = RequestMethod.GET)
     @ResponseBody
-    public List<Occurrence> save(@RequestParam(name = "") String title) {
+    public TitleDTO save(@RequestParam(name = "") String title) {
         List<Occurrence> list = null;
+        TitleDTO titleDTO = new TitleDTO();
 
         if (titleService.findByName(title) == null) {
+            Long before = System.currentTimeMillis();
             titleService.saveTitle(title);
             occurrenceService.saveOccurrence(title);
             list =  mainService.sendInTheDB(titleService.findByName(title));
+            Long after = System.currentTimeMillis();
+            titleDTO.setName(title);
+            titleDTO.setWordsList(list);
+            titleDTO.setSearchSource("Wikipedia");
+            titleDTO.setSearchTime(after-before);
         } else {
+            Long before = System.currentTimeMillis();
             list = occurrenceService.findAllOccurrences(title);
+            Long after = System.currentTimeMillis();
+            titleDTO.setName(title);
+            titleDTO.setWordsList(list);
+            titleDTO.setSearchSource("Database");
+            titleDTO.setSearchTime(after-before);
         }
 
-       return list;
+       return titleDTO;
     }
 
     @RequestMapping(value = "/file", method = RequestMethod.GET)

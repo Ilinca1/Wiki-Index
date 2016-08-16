@@ -1,12 +1,20 @@
-<div ng-app="myApp" ng-controller="searchController">
+<div>
+    <div class="container">
+        <h1> Enter a title:</h1>
+    </div>
 
-    Enter a title: <input type="text" ng-model="title"><br>
-    <button ng-click="searchTitle(title)"> GO</button>
+    <input type="text" ng-model="title">
 
-    <table class="table table-striped">
-        <tr ng-repeat="item in data" ng-cloak class="ng-cloak">
-            <td>{{item.word}}</td>
-            <td>{{item.occurrences}}</td>
-        </tr>
-    </table>
+    <button class="btn btn-default btn-s" ng-click="searchTitle(title)"> GO</button>
+    <br>
+
+    <canvas id="bar" class="chart chart-bar"
+            chart-data="value" chart-labels="labels" chart-series="series">
+    </canvas>
+
+    Time: {{data.searchTime}} milliseconds
+    <br>
+    Source: {{data.searchSource}}
+    <br>
+
 </div>

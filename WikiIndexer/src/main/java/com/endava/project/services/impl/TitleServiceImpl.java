@@ -23,7 +23,6 @@ public class TitleServiceImpl implements TitleService {
         Title title = new Title();
         title.setName(name);
         titleRepository.save(title);
-
     }
 
     @Override
@@ -31,6 +30,4 @@ public class TitleServiceImpl implements TitleService {
 
         return titleRepository.findByName(name);
     }
-
-
 }
