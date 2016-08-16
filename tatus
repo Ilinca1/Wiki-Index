@@ -1,0 +1,29 @@
+[33mcommit 6b9bd0fabbb60f4cb8786c808c32a9bb6133618a[m
+Author: Bogdan Soimu <bsoimu@endava.com>
+Date:   Fri Aug 12 10:59:17 2016 +0300
+
+    Addead reading titles from a file
+
+[33mcommit 4c3e9790f6883e41d983a1eebb3f56c83c56382c[m
+Author: Bogdan Soimu <bsoimu@endava.com>
+Date:   Thu Aug 11 17:59:43 2016 +0300
+
+    Am adaugat metoda pentru cautarea cuvintelor din mai multe articole
+
+[33mcommit d9f76018bdc56afd03a88d8fd51e4c37f94b1f86[m
+Author: ilinca1 <ilinca.vamesu@endava.com>
+Date:   Thu Aug 11 17:11:53 2016 +0300
+
+    Proiectul structurat mai bine + partea de BD
+
+[33mcommit 840c771cee4d06f39a8ef04a684e83b9a347aa75[m
+Author: ilinca1 <ilinca.vamesu@endava.com>
+Date:   Thu Aug 11 09:54:26 2016 +0300
+
+    Mock project
+
+[33mcommit 2c358698260f19df659a7a7c2238c09e1fb557f6[m
+Author: ilinca1 <ilinca.vamesu@endava.com>
+Date:   Thu Aug 11 09:47:46 2016 +0300
+
+    ReadMe

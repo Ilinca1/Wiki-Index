@@ -1,6 +1,8 @@
 package com.endava.project.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,6 +11,11 @@ import java.util.Map;
 public class ReadTitlesFromFile implements Runnable {
 
     private static Map<String, Integer> finalMap = new HashMap<String, Integer>();
+    private List<String> titles;
+
+    public ReadTitlesFromFile(List<String> titles) {
+        this.titles = titles;
+    }
 
     public static Map<String, Integer> getFinalMap() {
         return finalMap;
@@ -22,10 +29,11 @@ public class ReadTitlesFromFile implements Runnable {
     public void run() {
         FirstWordsGenerator firstWordsGenerator = new FirstWordsGenerator();
 
-        Map<String, Integer> map1 = firstWordsGenerator.findWordOccurrenceMultiple("D:\\ProiectFinal\\CLONE\\Wiki-Indexer-WikiIndexer\\WikiIndexer\\FisierTitluri.txt");
+        Map<String, Integer> map1 = firstWordsGenerator.findWordOccurrenceMultiple(titles);
         Map<String, Integer> map2 = firstWordsGenerator.sortTheWords(map1);
         synchronized (finalMap) {
             finalMap = firstWordsGenerator.wordsToBeSaved(map2);
         }
     }
+
 }

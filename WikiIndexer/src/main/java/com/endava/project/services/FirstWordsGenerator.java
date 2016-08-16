@@ -32,38 +32,11 @@ public class FirstWordsGenerator {
         return map;
     }
 
-    public Map<String, Integer> findWordOccurrenceMultiple(String fileName) {
+    public Map<String, Integer> findWordOccurrenceMultiple(List<String> titles) {
         Map<String, Integer> map = new HashMap<String, Integer>();
-        ArrayList<String> titles = new ArrayList<>();
-        int titleCounter = 0;
         Integer counter = 1;
 
-        Reader fileReader = null;
-        BufferedReader bufferedReader = null;
-        try {
-            fileReader = new FileReader(fileName);
-            bufferedReader = new BufferedReader(fileReader);
-            String data;
-            while ((data = bufferedReader.readLine()) != null) {
-                titles.add(data);
-                titleCounter++;
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("File missing '" + fileName + "'");
-        } catch (IOException ex) {
-            System.out.println("I/O Exception:" + ex.getMessage());
-        } finally {
-            System.out.println("---");
-            try {
-                if (bufferedReader != null) {
-                    bufferedReader.close();
-                }
-            } catch (IOException ex) {
-                System.out.println("I/O Exception:" + ex.getMessage());
-            }
-        }
-
-        for (int i = 0; i < titleCounter; i++) {
+        for (int i = 0; i < titles.size(); i++) {
             String content = readURL.readFromURL(titles.get(i));
             String[] words = content.split(separator);
             for (int j = 0; j < words.length; j++) {
@@ -113,4 +86,5 @@ public class FirstWordsGenerator {
 
         return finalMap;
     }
+
 }
