@@ -5,7 +5,6 @@ import com.endava.project.entities.Title;
 import com.endava.project.repositories.OccurrenceRepository;
 import com.endava.project.repositories.TitleRepository;
 import com.endava.project.services.OccurrenceService;
-import com.endava.project.services.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +25,9 @@ public class OccurrenceServiceImpl implements OccurrenceService {
     @Transactional
     public void saveOccurrence(String name) {
 
-        Title t = titleRepository.findByName(name);
+        Title title = titleRepository.findByName(name);
 
-        for (Occurrence occurrence : mainService.sendInTheDB(t)) {
+        for (Occurrence occurrence : mainService.showWordsForSingleTitle(title)) {
             occurrenceRepository.save(occurrence);
         }
     }

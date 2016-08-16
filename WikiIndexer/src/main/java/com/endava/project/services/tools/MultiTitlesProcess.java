@@ -1,6 +1,5 @@
-package com.endava.project.services;
+package com.endava.project.services.tools;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +7,12 @@ import java.util.Map;
 /**
  * Created by bsoimu on 8/12/2016.
  */
-public class ReadTitlesFromFile implements Runnable {
+public class MultiTitlesProcess implements Runnable {
 
     private static Map<String, Integer> finalMap = new HashMap<String, Integer>();
     private List<String> titles;
 
-    public ReadTitlesFromFile(List<String> titles) {
+    public MultiTitlesProcess(List<String> titles) {
         this.titles = titles;
     }
 
@@ -22,7 +21,7 @@ public class ReadTitlesFromFile implements Runnable {
     }
 
     public static void setFinalMap(Map<String, Integer> map3) {
-        ReadTitlesFromFile.finalMap = map3;
+        MultiTitlesProcess.finalMap = map3;
     }
 
     @Override
