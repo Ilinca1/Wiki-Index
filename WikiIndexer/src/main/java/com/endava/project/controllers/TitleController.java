@@ -1,12 +1,15 @@
 package com.endava.project.controllers;
 
+import com.endava.project.entities.Occurrence;
 import com.endava.project.services.OccurrenceService;
 import com.endava.project.services.TitleService;
 import com.endava.project.services.impl.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,16 +26,18 @@ public class TitleController {
 
     @RequestMapping(value = "/document", method = RequestMethod.GET)
     @ResponseBody
-    public void save(@RequestParam(name = "title") String title) {
-
+    public List<Occurrence> save(@RequestParam(name = "") String title) {
+        List<Occurrence> list = null;
 
         if (titleService.findByName(title) == null) {
             titleService.saveTitle(title);
             occurrenceService.saveOccurrence(title);
-        } else{
-            System.out.println("Deja e in baza de date!");
+            list =  mainService.showWordsForSingleTitle(titleService.findByName(title));
+        } else {
+            list = occurrenceService.findAllOccurrences(title);
         }
 
+       return list;
     }
 
     @RequestMapping(value = "/file", method = RequestMethod.GET)
@@ -46,7 +51,6 @@ public class TitleController {
         }
     }
 
+    }
 
 
-
-}

@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Wiki Indexer</title>
-    <link href="app/css/angular-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" media="all" href="css/bootstrap.min.css">
+    <link rel="stylesheet" media="all" href="css/custom.css">
     <style type="text/css">
         [ng\:cloak], [ng-cloak], .ng-cloak {
             display: none !important;
@@ -12,15 +13,33 @@
 
 <body ng-app="hello">
 <div class="container">
-    <h1>Greeting</h1>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">Search</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <h1>Top 10 most used words in the file you uploaded</h1>
     <div ui-view></div>
 </div>
-<script src="app/js/jquery-1.11.3.min.js" type="text/javascript"></script>
-<script src="app/js/angular.min.js" type="text/javascript"></script>
-<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
-<script src="app/js/angular-bootstrap.js" type="text/javascript"></script>
-<script src="app/js/app.module.js"></script>
-<script src="app/js/app.config.js"></script>
-<script src="app/js/homeController.js"></script>
+<script src="js/angular.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/app.module.js"></script>
+<script src="js/app.config.js"></script>
+<script src="js/homeController.js"></script>
+<script src="js/searchController.js"></script>
+<script src="services/search.service.js"></script>
 </body>
 </html>

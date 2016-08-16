@@ -56,4 +56,14 @@ public class Occurrence {
     public void setTitle(Title title) {
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return "Occurrence{" +
+                "id=" + id +
+                ", word='" + word + '\'' +
+                ", occurrences=" + occurrences +
+                ", title=" + title +
+                '}';
+    }
 }

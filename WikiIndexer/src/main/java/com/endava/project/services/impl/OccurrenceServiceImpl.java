@@ -5,9 +5,12 @@ import com.endava.project.entities.Title;
 import com.endava.project.repositories.OccurrenceRepository;
 import com.endava.project.repositories.TitleRepository;
 import com.endava.project.services.OccurrenceService;
+import com.endava.project.services.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class OccurrenceServiceImpl implements OccurrenceService {
@@ -30,6 +33,14 @@ public class OccurrenceServiceImpl implements OccurrenceService {
         for (Occurrence occurrence : mainService.showWordsForSingleTitle(title)) {
             occurrenceRepository.save(occurrence);
         }
+    }
+
+    @Override
+    public List<Occurrence> findAllOccurrences(String name) {
+
+        Title title = titleRepository.findByName(name);
+        return occurrenceRepository.findByTitle(title.getId());
+
     }
 
 }

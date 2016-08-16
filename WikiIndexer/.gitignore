@@ -1,6 +1,13 @@
 *.iml
+
 target
+
 .idea
+
 .cmd
+
 mvnw
+
 .mvn
+
+src/main/webapp/node_modules
