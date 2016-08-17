@@ -1,20 +1,36 @@
-<div>
-    <div class="container">
-        <h1> Enter a title:</h1>
+<form class="form-inline" class="container">
+    <div class="form-group">
+        <label for="input"><h3>Enter a title:</h3></label>
+        </div>
+        <div class="form-group">
+            <input type="text" ng-model="title" class="form-control" id="input" placeholder="Title">
+        </div>
+    <div class="form-group">
+        <button class="btn btn-default btn-s" ng-click="searchTitle(title)"> GO</button>
     </div>
+</form>
 
-    <input type="text" ng-model="title">
+<hr/>
+<div class="container">
+    <h2>{{ data.name }}</h2>
+    <p ng-show="myVar">
+        Time: {{data.searchTime}} milliseconds
+        <br>
+        Source: {{data.searchSource}}
+        <br>
+    </p>
+</div>
+<hr/>
 
-    <button class="btn btn-default btn-s" ng-click="searchTitle(title)"> GO</button>
-    <br>
-
-    <canvas id="bar" class="chart chart-bar"
-            chart-data="value" chart-labels="labels" chart-series="series">
+<div ng-show = "photo">
+    <canvas id="bar1" class="chart chart-bar"
+            chart-data="" chart-labels="">
     </canvas>
+</div>
 
-    Time: {{data.searchTime}} milliseconds
-    <br>
-    Source: {{data.searchSource}}
-    <br>
+<div class="perfect">
+    <canvas id="bar" class="chart chart-bar"
+            chart-data="value" chart-labels="labels">
+    </canvas>
 
 </div>

@@ -5,6 +5,7 @@ import com.endava.project.entities.Title;
 import com.endava.project.services.tools.*;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -20,12 +21,12 @@ public class MainService {
     }
 
 
-    public Map<String, Integer> showWordsForMultiTitles() {
+    public Map<String, Integer> showWordsForMultiTitles(InputStream inputStream) {
+
         FirstWordsGenerator firstWordsGenerator = new FirstWordsGenerator();
         MapMerger mapMerger = new MapMerger();
         FileReader fileReader = new FileReader();
-        ArrayList<String> titles = fileReader.readFromFile
-                ("D:/ProiectFinal/CLONE/Wiki-Indexer-WikiIndexer/WikiIndexer/FisierTitluri.txt");
+        ArrayList<String> titles = fileReader.readFromFile(inputStream);
 
         int threadTitlesSize = titles.size() / 4;
 
@@ -35,8 +36,6 @@ public class MainService {
         MultiTitlesProcess fourthThread = new MultiTitlesProcess(titles.subList(3 * threadTitlesSize, titles.size()));
 
         Map<String, Integer> finalMap = new HashMap<>();
-
-        Long before = System.currentTimeMillis();
 
         firstThread.run();
         finalMap.putAll(firstThread.getFinalMap());
@@ -50,11 +49,7 @@ public class MainService {
         fourthThread.run();
         finalMap = mapMerger.mapMerge(finalMap, fourthThread.getFinalMap());
 
-        Long after = System.currentTimeMillis();
-        System.out.println("The time is : " + (after - before));
-
         finalMap = firstWordsGenerator.wordsToBeSaved(firstWordsGenerator.sortTheWords(finalMap));
-
 
         return finalMap;
     }

@@ -35,12 +35,12 @@ public class TitleController {
             Long before = System.currentTimeMillis();
             titleService.saveTitle(title);
             occurrenceService.saveOccurrence(title);
-            list =  mainService.showWordsForSingleTitle(titleService.findByName(title));
+            list = mainService.showWordsForSingleTitle(titleService.findByName(title));
             Long after = System.currentTimeMillis();
             titleDTO.setName(title);
             titleDTO.setWordsList(list);
             titleDTO.setSearchSource("Wikipedia");
-            titleDTO.setSearchTime(after-before);
+            titleDTO.setSearchTime(after - before);
         } else {
             Long before = System.currentTimeMillis();
             list = occurrenceService.findAllOccurrences(title);
@@ -48,24 +48,12 @@ public class TitleController {
             titleDTO.setName(title);
             titleDTO.setWordsList(list);
             titleDTO.setSearchSource("Database");
-            titleDTO.setSearchTime(after-before);
+            titleDTO.setSearchTime(after - before);
         }
 
-       return titleDTO;
+        return titleDTO;
     }
-
-    @RequestMapping(value = "/file", method = RequestMethod.GET)
-    @ResponseBody
-    public void showWordsFromFile() {
-
-        Iterator it = mainService.showWordsForMultiTitles().entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            System.out.println(pair.getKey() + " " + pair.getValue());
-        }
-    }
-
-    }
-
-
 }
+
+
+

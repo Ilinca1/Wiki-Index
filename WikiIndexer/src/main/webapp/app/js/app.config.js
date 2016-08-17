@@ -1,11 +1,6 @@
 angular.module("hello")
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('home', {
-                url: '/home',
-                templateUrl: '../views/home.html',
-                controller: 'clickController'
-            })
             .state('document', {
                 url: '/document',
                 templateUrl: '../views/search.html',
@@ -17,5 +12,5 @@ angular.module("hello")
                 controller: 'fileController'
             });
 
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/document');
     })

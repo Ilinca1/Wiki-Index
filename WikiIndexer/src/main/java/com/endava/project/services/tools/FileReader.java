@@ -1,9 +1,6 @@
 package com.endava.project.services.tools;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -12,30 +9,29 @@ import java.util.ArrayList;
 
 public class FileReader {
 
-    public ArrayList<String> readFromFile(String fileName) {
+    public ArrayList<String> readFromFile(InputStream inputStream) {
         ArrayList<String> titles = new ArrayList<>();
-        Reader fileReader = null;
+        //  Reader fileReader = null;
         BufferedReader bufferedReader = null;
 
         try {
-            fileReader = new java.io.FileReader(fileName);
-            bufferedReader = new BufferedReader(fileReader);
+            //   fileReader = new java.io.FileReader(fileName);
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String data;
             while ((data = bufferedReader.readLine()) != null) {
                 titles.add(data);
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("File missing '" + fileName + "'");
+            ex.printStackTrace();
         } catch (IOException ex) {
-            System.out.println("I/O Exception:" + ex.getMessage());
+            ex.printStackTrace();
         } finally {
-            System.out.println("---");
             try {
                 if (bufferedReader != null) {
                     bufferedReader.close();
                 }
             } catch (IOException ex) {
-                System.out.println("I/O Exception:" + ex.getMessage());
+                ex.printStackTrace();
             }
         }
 

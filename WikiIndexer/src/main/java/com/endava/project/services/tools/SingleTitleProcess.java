@@ -15,18 +15,21 @@ import java.util.Map;
 public class SingleTitleProcess {
 
     private Title title;
-    private static List<Occurrence> list = new ArrayList<>();
+    private List<Occurrence> list = new ArrayList<>();
 
     public SingleTitleProcess(Title title) {
+
         this.title = title;
     }
 
-    public static List<Occurrence> getList() {
+    public List<Occurrence> getList() {
+
         return list;
     }
 
-    public static void setList(List<Occurrence> list) {
-        SingleTitleProcess.list = list;
+    public void setList(List<Occurrence> list) {
+
+        this.list = list;
     }
 
     public void generateTopWords() {

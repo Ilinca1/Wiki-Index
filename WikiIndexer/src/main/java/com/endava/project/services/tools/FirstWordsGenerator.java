@@ -10,7 +10,7 @@ public class FirstWordsGenerator {
             "is", "with", "for", "or", "they", "be", "on", "their", "have", "other", "used", "from",
             "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
             "has", "not", "been", "some", "it", "n", "many", "its", "s", "000", "nthe", "use", "frp", "but",
-            "ten", "half", "de", "at", "was", "most", "1");
+            "ten", "half", "de", "at", "was", "most", "1","u2014","u","san");
     private ReadURL readURL = new ReadURL();
 
     public Map<String, Integer> findWordOccurrence(String text) {
