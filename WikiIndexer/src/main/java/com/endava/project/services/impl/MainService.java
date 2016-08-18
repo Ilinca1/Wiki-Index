@@ -24,12 +24,12 @@ public class MainService {
         return singleTitleProcess.getList();
     }
 
-
     public Map<String, Integer> showWordsForMultiTitles(InputStream inputStream) {
 
         FirstWordsGenerator firstWordsGenerator = new FirstWordsGenerator();
         MapMerger mapMerger = new MapMerger();
         FileReader fileReader = new FileReader();
+
         ArrayList<String> titles = fileReader.readFromFile(inputStream);
 
         Map<String, Integer> finalMap = new HashMap<>();

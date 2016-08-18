@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by bsoimu on 8/12/2016.
+ * The generateTopWords gets the content of the article using the readFromURL method and then the methods from
+ * FirstWordsGenerator in order to process the article and return the top words for the respective article.
+ * The method puts the top words in a list of Occurrences which will be used futher to save them in the DB.
  */
 
 public class SingleTitleProcess {
@@ -35,12 +37,14 @@ public class SingleTitleProcess {
     public void generateTopWords() {
         FirstWordsGenerator firstWordsGenerator = new FirstWordsGenerator();
         ReadURL readURL = new ReadURL();
-        String content = readURL.readFromURL(title.getName());
-        Map<String, Integer> map1 = firstWordsGenerator.findWordOccurrence(content);
-        Map<String, Integer> map2 = firstWordsGenerator.sortTheWords(map1);
-        Map<String, Integer> map3 = firstWordsGenerator.wordsToBeSaved(map2);
 
-        Iterator it = map3.entrySet().iterator();
+        String content = readURL.readFromURL(title.getName());
+        Map<String, Integer> contentMap = firstWordsGenerator.findWordOccurrence(content);
+        Map<String, Integer> sortedMap = firstWordsGenerator.sortTheWords(contentMap);
+        Map<String, Integer> topWordsMap = firstWordsGenerator.wordsToBeSaved(sortedMap);
+
+        Iterator it = topWordsMap.entrySet().iterator();
+
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             Occurrence occurrence = new Occurrence();

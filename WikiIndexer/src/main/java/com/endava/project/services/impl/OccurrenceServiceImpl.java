@@ -27,7 +27,6 @@ public class OccurrenceServiceImpl implements OccurrenceService {
     @Override
     @Transactional
     public void saveOccurrence(String name) {
-
         Title title = titleRepository.findByName(name);
 
         for (Occurrence occurrence : mainService.showWordsForSingleTitle(title)) {
@@ -37,8 +36,8 @@ public class OccurrenceServiceImpl implements OccurrenceService {
 
     @Override
     public List<Occurrence> findAllOccurrences(String name) {
-
         Title title = titleRepository.findByName(name);
+
         return occurrenceRepository.findByTitle(title.getId());
 
     }

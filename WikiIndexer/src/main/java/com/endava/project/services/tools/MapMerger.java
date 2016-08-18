@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Created by bsoimu on 8/16/2016.
+ * Merges two maps. In case there are duplicate words adds their values(occurrences)
+ * in order not to lose occurrences for the respective words.
  */
 public class MapMerger {
 

@@ -2,6 +2,17 @@ package com.endava.project.services.tools;
 
 import java.util.*;
 
+/**
+ * This class has multiple methods used for the sorting of the words from an article or multiple articles.
+ * The separator is used to split the words from the article and process them.
+ * ignoreAll is a list of words to be ignored in the article in order to get a result that is relevant.
+ * findWordOccurrence -> returns a map of the words using the content of an article.
+ * sortTheWords -> gets a map of the words and their occurrences and returns it sorted
+ *                 by the values of the map(occurrences of the words) and
+ *                 maintains the insertion order using a LinkedList and a LinkedHashMap.
+ * wordsToBeSaved -> gets a sorted map of words and returns only the first 10 elements.
+ */
+
 public class FirstWordsGenerator {
 
     private static final String separator = "(\\.|,|;|:|\\\\|/|\\?|~|`|<|>|\\[|]|\\{|}|\\(|\\)" +
@@ -10,7 +21,7 @@ public class FirstWordsGenerator {
             "is", "with", "for", "or", "they", "be", "on", "their", "have", "other", "used", "from",
             "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
             "has", "not", "been", "some", "it", "n", "many", "its", "s", "000", "nthe", "use", "frp", "but",
-            "ten", "half", "de", "at", "was", "most", "1","u2014","u","san");
+            "ten", "half", "de", "at", "was", "most", "1","u2014","u","san", "u2013");
     private ReadURL readURL = new ReadURL();
 
     public Map<String, Integer> findWordOccurrence(String text) {
@@ -31,29 +42,9 @@ public class FirstWordsGenerator {
         return map;
     }
 
-    public Map<String, Integer> findWordOccurrenceMultiple(List<String> titles) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        Integer counter = 1;
 
-        for (int i = 0; i < titles.size(); i++) {
-            String content = readURL.readFromURL(titles.get(i));
-            String[] words = content.split(separator);
-            for (int j = 0; j < words.length; j++) {
-                words[j] = words[j].toLowerCase();
-                if (!ignoreAll.contains(words[j])) {
-                    counter = map.get(words[j]);
-                    if (counter == null)
-                        counter = new Integer(0);
-                    map.put(words[j], counter + 1);
-                }
-            }
-        }
-
-        return map;
-    }
-
-    //Sorteaza mapul dupa cele mai multe aparitii
     public Map<String, Integer> sortTheWords(Map<String, Integer> map) {
+        Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
         List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(map.entrySet());
 
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
@@ -63,8 +54,6 @@ public class FirstWordsGenerator {
             }
         });
 
-        //Cu ajutorul unei LinkedList mentinem ordinea inserarii
-        Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> entry : list) {
             sortedMap.put(entry.getKey(), entry.getValue());
         }
@@ -72,11 +61,12 @@ public class FirstWordsGenerator {
         return sortedMap;
     }
 
-    //Primeste o lista sortata si pastreaza primele 10 elemente
+
     public Map<String, Integer> wordsToBeSaved(Map<String, Integer> map) {
         Map<String, Integer> finalMap = new HashMap<>();
         Iterator it = map.entrySet().iterator();
         int i = 0;
+
         while (it.hasNext() && i < 10) {
             Map.Entry pair = (Map.Entry) it.next();
             i++;
@@ -85,5 +75,4 @@ public class FirstWordsGenerator {
 
         return finalMap;
     }
-
 }

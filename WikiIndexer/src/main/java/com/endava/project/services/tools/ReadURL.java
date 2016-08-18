@@ -8,7 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by ivamesu on 8/11/2016.
+ * This method uses a Wiki API which returns the article as a JSON. The JSON is read using a BufferedReader
+ * for input streams.
  */
 public class ReadURL {
 
