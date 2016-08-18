@@ -57,4 +57,11 @@ public class Occurrence {
         this.title = title;
     }
 
+    public boolean equals(Occurrence o) {
+        return (o.getTitle().getName().equals(this.getTitle().getName())) && (o.getWord().equals(this.getWord()))
+                && (o.getOccurrences() == this.getOccurrences());
+
+
+    }
+
 }

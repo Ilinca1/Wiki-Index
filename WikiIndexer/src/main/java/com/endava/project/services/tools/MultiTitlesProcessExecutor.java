@@ -1,14 +1,16 @@
 package com.endava.project.services.tools;
 
-import com.endava.project.services.tools.FirstWordsGenerator;
-import com.endava.project.services.tools.ReadURL;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by bsoimu on 8/18/2016.
+ * This runnable uses the methods from FirstWordsGenerator. It is used only when a file with multiple titles will
+ * be uploaded to the UI. Each title will be assigned to a thread that will process it and return the map of words
+ * that will be used in determining the top words for all the titles.
  */
+
 public class MultiTitlesProcessExecutor implements Runnable {
     private String title;
     private Map<String, Integer> finalMap;
@@ -31,10 +33,8 @@ public class MultiTitlesProcessExecutor implements Runnable {
         ReadURL readURL = new ReadURL();
 
         String content = readURL.readFromURL(title);
+        Map<String, Integer> contentMap = firstWordsGenerator.findWordOccurrence(content);
+        finalMap = firstWordsGenerator.sortTheWords(contentMap);
 
-        Map<String, Integer> map1 = firstWordsGenerator.findWordOccurrence(content);
-        finalMap = firstWordsGenerator.sortTheWords(map1);
-
-        System.out.println("done");
     }
 }

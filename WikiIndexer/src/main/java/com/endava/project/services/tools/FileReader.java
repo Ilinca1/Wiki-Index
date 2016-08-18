@@ -1,5 +1,7 @@
 package com.endava.project.services.tools;
 
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -9,6 +11,7 @@ import java.util.ArrayList;
  * to a BufferedReader. In this way we can read each line of the file and return them into a list.
  */
 
+@Component
 public class FileReader {
 
     public ArrayList<String> readFromFile(InputStream inputStream) {

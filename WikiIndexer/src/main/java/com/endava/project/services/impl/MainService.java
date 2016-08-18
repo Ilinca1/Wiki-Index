@@ -3,6 +3,7 @@ package com.endava.project.services.impl;
 import com.endava.project.entities.Occurrence;
 import com.endava.project.entities.Title;
 import com.endava.project.services.tools.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -18,25 +19,30 @@ import java.util.concurrent.Future;
 @Service
 public class MainService {
 
+    @Autowired
+    FirstWordsGenerator firstWordsGenerator;
+
+    @Autowired
+    MapMerger mapMerger;
+
+    @Autowired
+    FileReader fileReader;
+
     public List<Occurrence> showWordsForSingleTitle(Title title) {
         SingleTitleProcess singleTitleProcess = new SingleTitleProcess(title);
         singleTitleProcess.generateTopWords();
         return singleTitleProcess.getList();
     }
 
-
     public Map<String, Integer> showWordsForMultiTitles(InputStream inputStream) {
 
-        FirstWordsGenerator firstWordsGenerator = new FirstWordsGenerator();
-        MapMerger mapMerger = new MapMerger();
-        FileReader fileReader = new FileReader();
         ArrayList<String> titles = fileReader.readFromFile(inputStream);
 
         Map<String, Integer> finalMap = new HashMap<>();
 
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-        for(String title : titles){
+        for (String title : titles) {
             MultiTitlesProcessExecutor multiTitlesProcessExecutor = new MultiTitlesProcessExecutor(title);
             Future future = executorService.submit(multiTitlesProcessExecutor);
             try {

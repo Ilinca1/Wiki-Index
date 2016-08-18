@@ -27,7 +27,6 @@ public class TitleServiceImpl implements TitleService {
 
     @Override
     public Title findByName(String name) {
-
         return titleRepository.findByName(name);
     }
 }
