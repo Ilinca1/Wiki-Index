@@ -1,4 +1,4 @@
-package com.endava.project.services.impl;
+package com.endava.project.services.tools;
 
 import com.endava.project.services.tools.FirstWordsGenerator;
 import com.endava.project.services.tools.ReadURL;
@@ -33,8 +33,8 @@ public class MultiTitlesProcessExecutor implements Runnable {
         String content = readURL.readFromURL(title);
 
         Map<String, Integer> map1 = firstWordsGenerator.findWordOccurrence(content);
-        Map<String, Integer> map2 = firstWordsGenerator.sortTheWords(map1);
-        finalMap = firstWordsGenerator.wordsToBeSaved(map2);
+        finalMap = firstWordsGenerator.sortTheWords(map1);
+
         System.out.println("done");
     }
 }

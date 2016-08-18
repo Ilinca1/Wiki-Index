@@ -3,10 +3,7 @@ package com.endava.project.services.tools;
 import com.endava.project.entities.Occurrence;
 import com.endava.project.entities.Title;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by bsoimu on 8/12/2016.
@@ -15,7 +12,7 @@ import java.util.Map;
 public class SingleTitleProcess {
 
     private Title title;
-    private List<Occurrence> list = new ArrayList<>();
+    private List<Occurrence> list = new LinkedList<>();
 
     public SingleTitleProcess(Title title) {
 

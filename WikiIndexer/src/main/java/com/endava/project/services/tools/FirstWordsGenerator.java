@@ -74,7 +74,7 @@ public class FirstWordsGenerator {
 
     //Primeste o lista sortata si pastreaza primele 10 elemente
     public Map<String, Integer> wordsToBeSaved(Map<String, Integer> map) {
-        Map<String, Integer> finalMap = new HashMap<>();
+        Map<String, Integer> finalMap = new LinkedHashMap<>();
         Iterator it = map.entrySet().iterator();
         int i = 0;
         while (it.hasNext() && i < 10) {

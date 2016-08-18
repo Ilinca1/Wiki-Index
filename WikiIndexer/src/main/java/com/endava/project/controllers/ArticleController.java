@@ -8,13 +8,14 @@ import com.endava.project.services.impl.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+/**
+ * This controller manages the DTO that is send into the UI and the data that is saved in the database.
+ */
 
 @RestController
-public class TitleController {
+public class ArticleController {
 
     @Autowired
     private TitleService titleService;
@@ -25,6 +26,14 @@ public class TitleController {
     @Autowired
     private MainService mainService;
 
+    /**
+     * Check if the title is in the database:
+     * - if the title is not in the database is inserted + the occurrences and the search time is saved in the DTO
+     * - if the title is in the database -> gets the information from the database and search time is saved in the DTO
+     *
+     * @param title
+     * @return TitleDTO
+     */
     @RequestMapping(value = "/document", method = RequestMethod.GET)
     @ResponseBody
     public TitleDTO save(@RequestParam(name = "") String title) {
