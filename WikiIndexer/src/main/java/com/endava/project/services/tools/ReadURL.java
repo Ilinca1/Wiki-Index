@@ -1,5 +1,7 @@
 package com.endava.project.services.tools;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +13,7 @@ import java.net.URL;
  * This method uses a Wiki API which returns the article as a JSON. The JSON is read using a BufferedReader
  * for input streams.
  */
+@Component
 public class ReadURL {
 
     static URL url;

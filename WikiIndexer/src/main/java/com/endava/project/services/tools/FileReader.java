@@ -1,5 +1,7 @@
 package com.endava.project.services.tools;
 
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -7,6 +9,7 @@ import java.util.ArrayList;
  * Created by bsoimu on 8/13/2016.
  */
 
+@Component
 public class FileReader {
 
     public ArrayList<String> readFromFile(InputStream inputStream) {

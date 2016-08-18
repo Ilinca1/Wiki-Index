@@ -1,5 +1,8 @@
 package com.endava.project.services.tools;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.*;
 
 /**
@@ -13,16 +16,20 @@ import java.util.*;
  * wordsToBeSaved -> gets a sorted map of words and returns only the first 10 elements.
  */
 
+@Component
 public class FirstWordsGenerator {
 
     private static final String separator = "(\\.|,|;|:|\\\\|/|\\?|~|`|<|>|\\[|]|\\{|}|\\(|\\)" +
             "|!|@|#|\\$|%|\\^|&|\\-|_|\\+|'|=|\\*|\"|\\|| |\\t|\\n|\\r)+";
-    private static final List<String> ignoreAll = Arrays.asList("the", "of", "a", "and", "in", "to", "are", "as", "that",
-            "is", "with", "for", "or", "they", "be", "on", "their", "have", "other", "used", "from",
-            "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
+
+    private static final String separator2 = "=+|[\\\\.,]?\\\\s+|\\\\.";
+
+    private static final List<String> ignoreAll = Arrays.asList("the", "of", "a", "and", "in", "to", "are",
+            "as", "that", "is", "with", "for", "or", "they", "be", "on", "their", "have", "other", "used",
+            "from", "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
             "has", "not", "been", "some", "it", "n", "many", "its", "s", "000", "nthe", "use", "frp", "but",
-            "ten", "half", "de", "at", "was", "most", "1","u2014","u","san", "u2013");
-    private ReadURL readURL = new ReadURL();
+            "ten", "half", "de", "at", "was", "most", "1","u2014","u","san", "u2013", "u0103", "who");
+
 
     public Map<String, Integer> findWordOccurrence(String text) {
         Map<String, Integer> map = new HashMap<String, Integer>();
