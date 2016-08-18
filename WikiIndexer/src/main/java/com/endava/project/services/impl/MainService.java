@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Created by ivamesu on 8/11/2016.
@@ -28,26 +32,22 @@ public class MainService {
         FileReader fileReader = new FileReader();
         ArrayList<String> titles = fileReader.readFromFile(inputStream);
 
-        int threadTitlesSize = titles.size() / 4;
-
-        MultiTitlesProcess firstThread = new MultiTitlesProcess(titles.subList(0, threadTitlesSize));
-        MultiTitlesProcess secondThread = new MultiTitlesProcess(titles.subList(threadTitlesSize, 2 * threadTitlesSize));
-        MultiTitlesProcess thirdThread = new MultiTitlesProcess(titles.subList(2 * threadTitlesSize, 3 * threadTitlesSize));
-        MultiTitlesProcess fourthThread = new MultiTitlesProcess(titles.subList(3 * threadTitlesSize, titles.size()));
-
         Map<String, Integer> finalMap = new HashMap<>();
 
-        firstThread.run();
-        finalMap.putAll(firstThread.getFinalMap());
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-        secondThread.run();
-        finalMap = mapMerger.mapMerge(finalMap, secondThread.getFinalMap());
-
-        thirdThread.run();
-        finalMap = mapMerger.mapMerge(finalMap, thirdThread.getFinalMap());
-
-        fourthThread.run();
-        finalMap = mapMerger.mapMerge(finalMap, fourthThread.getFinalMap());
+        for(String title : titles){
+            MultiTitlesProcessExecutor multiTitlesProcessExecutor = new MultiTitlesProcessExecutor(title);
+            Future future = executorService.submit(multiTitlesProcessExecutor);
+            try {
+                future.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            finalMap = mapMerger.mapMerge(finalMap, multiTitlesProcessExecutor.getFinalMap());
+        }
 
         finalMap = firstWordsGenerator.wordsToBeSaved(firstWordsGenerator.sortTheWords(finalMap));
 

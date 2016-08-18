@@ -11,11 +11,9 @@ public class FileReader {
 
     public ArrayList<String> readFromFile(InputStream inputStream) {
         ArrayList<String> titles = new ArrayList<>();
-        //  Reader fileReader = null;
         BufferedReader bufferedReader = null;
 
         try {
-            //   fileReader = new java.io.FileReader(fileName);
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String data;
             while ((data = bufferedReader.readLine()) != null) {
