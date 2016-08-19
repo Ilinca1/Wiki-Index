@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by ivamesu on 8/11/2016.
- */
 @Service
 public class TitleServiceImpl implements TitleService {
 

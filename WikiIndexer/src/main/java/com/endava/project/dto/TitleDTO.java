@@ -5,7 +5,10 @@ import com.endava.project.entities.Occurrence;
 import java.util.List;
 
 /**
- * Created by bsoimu on 8/16/2016.
+ * The objects of this class are send into the UI.
+ * - list of words + occurrences
+ * - search Time
+ * - source: database or Wikipedia
  */
 public class TitleDTO {
 
@@ -49,12 +52,4 @@ public class TitleDTO {
         this.wordsList = wordsList;
     }
 
-    @Override
-    public String toString() {
-        return "TitleDTO{" +
-                "name='" + name + '\'' +
-                ", searchTime=" + searchTime +
-                ", searchSource='" + searchSource + '\'' +
-                '}';
-    }
 }

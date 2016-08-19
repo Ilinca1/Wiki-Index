@@ -1,5 +1,7 @@
 package com.endava.project.services.tools;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,11 +33,8 @@ public class MultiTitlesProcessExecutor implements Runnable {
         ReadURL readURL = new ReadURL();
 
         String content = readURL.readFromURL(title);
-
         Map<String, Integer> contentMap = firstWordsGenerator.findWordOccurrence(content);
-        Map<String, Integer> sortedMap = firstWordsGenerator.sortTheWords(contentMap);
-        finalMap = firstWordsGenerator.wordsToBeSaved(sortedMap);
+        finalMap = firstWordsGenerator.sortTheWords(contentMap);
 
-        System.out.println("done");
     }
 }

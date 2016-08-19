@@ -11,6 +11,7 @@ import java.util.stream.Stream;
  * Merges two maps. In case there are duplicate words adds their values(occurrences)
  * in order not to lose occurrences for the respective words.
  */
+
 @Component
 public class MapMerger {
 

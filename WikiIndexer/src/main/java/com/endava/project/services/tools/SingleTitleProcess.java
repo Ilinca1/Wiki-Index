@@ -3,21 +3,18 @@ package com.endava.project.services.tools;
 import com.endava.project.entities.Occurrence;
 import com.endava.project.entities.Title;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * The generateTopWords gets the content of the article using the readFromURL method and then the methods from
  * FirstWordsGenerator in order to process the article and return the top words for the respective article.
- * The method puts the top words in a list of Occurrences which will be used futher to save them in the DB.
+ * The method puts the top words in a list of Occurrences which will be used further to save them in the DB.
  */
 
 public class SingleTitleProcess {
 
     private Title title;
-    private List<Occurrence> list = new ArrayList<>();
+    private List<Occurrence> list = new LinkedList<>();
 
     public SingleTitleProcess(Title title) {
 

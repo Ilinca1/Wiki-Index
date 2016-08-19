@@ -1,5 +1,6 @@
 angular.module('hello')
     .controller('fileController', ['$scope', '$http', function ($scope, $http) {
+        $scope.photo = true;
         $scope.uploadFile = function () {
             var file = $scope.myFile;
             var uploadUrl = "http://localhost:8080/file";
@@ -15,6 +16,7 @@ angular.module('hello')
                     $scope.data = data;
                     $scope.labels = [];
                     $scope.value = [];
+                    $scope.photo = false;
                     for(var item in data){
                         $scope.labels.push(item);
                         $scope.value.push(data[item]);

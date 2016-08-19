@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Occurrence {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "word")
@@ -57,13 +57,11 @@ public class Occurrence {
         this.title = title;
     }
 
-    @Override
-    public String toString() {
-        return "Occurrence{" +
-                "id=" + id +
-                ", word='" + word + '\'' +
-                ", occurrences=" + occurrences +
-                ", title=" + title +
-                '}';
+    public boolean equals(Occurrence o) {
+        return (o.getTitle().getName().equals(this.getTitle().getName())) && (o.getWord().equals(this.getWord()))
+                && (o.getOccurrences() == this.getOccurrences());
+
+
     }
+
 }

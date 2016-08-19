@@ -1,6 +1,5 @@
 package com.endava.project.services.tools;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -21,14 +20,11 @@ public class FirstWordsGenerator {
 
     private static final String separator = "(\\.|,|;|:|\\\\|/|\\?|~|`|<|>|\\[|]|\\{|}|\\(|\\)" +
             "|!|@|#|\\$|%|\\^|&|\\-|_|\\+|'|=|\\*|\"|\\|| |\\t|\\n|\\r)+";
-
-    private static final String separator2 = "=+|[\\\\.,]?\\\\s+|\\\\.";
-
     private static final List<String> ignoreAll = Arrays.asList("the", "of", "a", "and", "in", "to", "are",
             "as", "that", "is", "with", "for", "or", "they", "be", "on", "their", "have", "other", "used",
             "from", "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
             "has", "not", "been", "some", "it", "n", "many", "its", "s", "000", "nthe", "use", "frp", "but",
-            "ten", "half", "de", "at", "was", "most", "1","u2014","u","san", "u2013", "u0103", "who");
+            "ten", "half", "de", "at", "was", "most", "1","u2014","u","san", "u2013", "u0103", "who", "0");
 
 
     public Map<String, Integer> findWordOccurrence(String text) {
@@ -68,9 +64,8 @@ public class FirstWordsGenerator {
         return sortedMap;
     }
 
-
     public Map<String, Integer> wordsToBeSaved(Map<String, Integer> map) {
-        Map<String, Integer> finalMap = new HashMap<>();
+        Map<String, Integer> finalMap = new LinkedHashMap<>();
         Iterator it = map.entrySet().iterator();
         int i = 0;
 
