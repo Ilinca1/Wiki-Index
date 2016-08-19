@@ -25,7 +25,7 @@ public class FirstWordsGenerator {
             "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
             "has", "not", "been", "some", "it", "n", "many", "its", "s", "000", "nthe", "use", "frp", "but",
             "ten", "half", "de", "at", "was", "most", "1", "u2014", "u", "san", "u2013", "i", "ii", "k", "first",
-            "u2019s", "c", "st","his", "her","he","she");
+            "u2019s", "c", "st","his", "her","he","she", "0", "2", "3", "4", "5", "6","7","8","9");
 
     @Autowired
     private ReadURL readURL;
