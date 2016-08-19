@@ -14,8 +14,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- * Created by ivamesu on 8/11/2016.
+ * showWordsForSingleTitle returns a list of Occurrence objects that will consist of the top 10 occurences in the
+ * single article submitted.
+ *
+ * showWordsForMultiTitles returns a map that will consist of the top 10 words with their number of occurrences.
+ * This map will contain all the contents from the multiple articles submitted using a Executor which makes sure that
+ * every title will be processed by a thread and then its content added to the common map. At the end the map
+ * is sorted and the top words are selected and returned.
  */
+
 @Service
 public class MainService {
 
@@ -42,7 +49,7 @@ public class MainService {
 
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-        for (String title : titles) {
+        for(String title : titles){
             MultiTitlesProcessExecutor multiTitlesProcessExecutor = new MultiTitlesProcessExecutor(title);
             Future future = executorService.submit(multiTitlesProcessExecutor);
             try {
