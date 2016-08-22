@@ -36,19 +36,21 @@ public class SingleTitleProcess {
         ReadURL readURL = new ReadURL();
 
         String content = readURL.readFromURL(title.getName());
-        Map<String, Integer> contentMap = firstWordsGenerator.findWordOccurrence(content);
-        Map<String, Integer> sortedMap = firstWordsGenerator.sortTheWords(contentMap);
-        Map<String, Integer> topWordsMap = firstWordsGenerator.wordsToBeSaved(sortedMap);
+        if(content.length() > 1000) {
+            Map<String, Integer> contentMap = firstWordsGenerator.findWordOccurrence(content);
+            Map<String, Integer> sortedMap = firstWordsGenerator.sortTheWords(contentMap);
+            Map<String, Integer> topWordsMap = firstWordsGenerator.wordsToBeSaved(sortedMap);
 
-        Iterator it = topWordsMap.entrySet().iterator();
+            Iterator it = topWordsMap.entrySet().iterator();
 
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            Occurrence occurrence = new Occurrence();
-            occurrence.setWord((String) pair.getKey());
-            occurrence.setOccurrences((Integer) pair.getValue());
-            occurrence.setTitle(title);
-            list.add(occurrence);
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                Occurrence occurrence = new Occurrence();
+                occurrence.setWord((String) pair.getKey());
+                occurrence.setOccurrences((Integer) pair.getValue());
+                occurrence.setTitle(title);
+                list.add(occurrence);
+            }
         }
     }
 }

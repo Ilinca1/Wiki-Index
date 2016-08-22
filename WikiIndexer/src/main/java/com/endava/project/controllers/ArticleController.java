@@ -44,15 +44,22 @@ public class ArticleController {
             Long before = System.currentTimeMillis();
 
             titleService.saveTitle(title);
-            occurrenceService.saveOccurrence(title);
             list = mainService.showWordsForSingleTitle(titleService.findByName(title));
 
-            Long after = System.currentTimeMillis();
+            if (list != null) {
+                occurrenceService.saveOccurrence(title);
 
-            titleDTO.setName(title);
-            titleDTO.setWordsList(list);
-            titleDTO.setSearchSource("Wikipedia");
-            titleDTO.setSearchTime(after - before);
+                Long after = System.currentTimeMillis();
+
+                titleDTO.setName(title);
+                titleDTO.setWordsList(list);
+                titleDTO.setSearchSource("Wikipedia");
+                titleDTO.setSearchTime(after - before);
+            } else {
+
+                titleDTO = null;
+            }
+
         } else {
             Long before = System.currentTimeMillis();
 
